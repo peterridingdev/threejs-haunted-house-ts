@@ -33,8 +33,8 @@ export default class Experience {
     this.time = new Time();
     this.scene = new THREE.Scene();
     this.camera = new Camera();
-    this.renderer = new Renderer();
-    this.world = new World();
+    this.renderer = new Renderer(this);
+    this.world = new World(this);
 
     this.sizes.on("resize", () => this.resize());
     this.time.on("tick", () => this.update());
