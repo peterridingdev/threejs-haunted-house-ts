@@ -1,6 +1,6 @@
-import * as THREE from "three";
-import Experience from "./Experience";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import * as THREE from 'three';
+import Experience from './Experience';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default class Camera {
   // Public
@@ -15,9 +15,7 @@ export default class Camera {
 
   constructor() {
     // References from Experience singleton
-    this.experience = new Experience(
-      window.experience?.canvas ?? this.createCanvas(),
-    );
+    this.experience = new Experience(window.experience?.canvas ?? this.createCanvas());
     this.sizes = this.experience.sizes;
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
@@ -28,12 +26,7 @@ export default class Camera {
   }
 
   private setInstance(): void {
-    this.instance = new THREE.PerspectiveCamera(
-      35,
-      this.sizes.width / this.sizes.height,
-      0.1,
-      100,
-    );
+    this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 100);
     this.instance.position.set(6, 4, 8);
     this.scene.add(this.instance);
   }
@@ -54,8 +47,8 @@ export default class Camera {
 
   // Fallback if no canvas exists yet (strict TS safe)
   private createCanvas(): HTMLCanvasElement {
-    const canvas = document.querySelector<HTMLCanvasElement>("canvas.webgl");
-    if (!canvas) throw new Error("Canvas not found");
+    const canvas = document.querySelector<HTMLCanvasElement>('canvas.webgl');
+    if (!canvas) throw new Error('Canvas not found');
     return canvas;
   }
 }

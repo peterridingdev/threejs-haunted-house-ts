@@ -10,8 +10,8 @@ export default class EventEmitter {
   private callbacks: Callbacks = { base: {} };
 
   on(_names: string, callback: Callback): this | false {
-    if (!_names || typeof callback !== "function") {
-      console.warn("Invalid name or callback");
+    if (!_names || typeof callback !== 'function') {
+      console.warn('Invalid name or callback');
       return false;
     }
 
@@ -21,8 +21,7 @@ export default class EventEmitter {
       const { namespace, value } = this.resolveName(_name);
 
       if (!this.callbacks[namespace]) this.callbacks[namespace] = {};
-      if (!this.callbacks[namespace][value])
-        this.callbacks[namespace][value] = [];
+      if (!this.callbacks[namespace][value]) this.callbacks[namespace][value] = [];
 
       this.callbacks[namespace][value].push(callback);
     });
@@ -32,7 +31,7 @@ export default class EventEmitter {
 
   off(_names: string): this | false {
     if (!_names) {
-      console.warn("Invalid name");
+      console.warn('Invalid name');
       return false;
     }
 
@@ -41,7 +40,7 @@ export default class EventEmitter {
     names.forEach((_name) => {
       const { namespace, value } = this.resolveName(_name);
 
-      if (namespace === "base" && value === "") {
+      if (namespace === 'base' && value === '') {
         delete this.callbacks[namespace];
         return;
       }
@@ -59,7 +58,7 @@ export default class EventEmitter {
 
   trigger(_name: string, _args: any[] = []): any {
     if (!_name) {
-      console.warn("Invalid name");
+      console.warn('Invalid name');
       return false;
     }
 
@@ -75,7 +74,7 @@ export default class EventEmitter {
       });
     };
 
-    if (namespace === "base") {
+    if (namespace === 'base') {
       for (const ns in this.callbacks) {
         if (this.callbacks[ns]?.[value]) {
           invoke(this.callbacks[ns][value]);
@@ -92,17 +91,17 @@ export default class EventEmitter {
 
   private resolveNames(_names: string): string[] {
     return _names
-      .replace(/[^a-zA-Z0-9 ,/.]/g, "")
-      .replace(/[,/]+/g, " ")
-      .split(" ");
+      .replace(/[^a-zA-Z0-9 ,/.]/g, '')
+      .replace(/[,/]+/g, ' ')
+      .split(' ');
   }
 
   private resolveName(name: string) {
-    const parts = name.split(".");
+    const parts = name.split('.');
     return {
       original: name,
       value: parts[0],
-      namespace: parts[1] || "base",
+      namespace: parts[1] || 'base',
     };
   }
 }

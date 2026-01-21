@@ -1,5 +1,5 @@
-import * as THREE from "three";
-import Experience from "../Experience.js";
+import * as THREE from 'three';
+import Experience from '../Experience.js';
 
 export default class Environment {
   private experience: Experience;
@@ -15,7 +15,7 @@ export default class Environment {
   }
 
   private setSunLight(): void {
-    this.sunLight = new THREE.DirectionalLight("#ffffff", 4);
+    this.sunLight = new THREE.DirectionalLight('#ffffff', 4);
     this.sunLight.castShadow = true;
     this.sunLight.shadow.camera.far = 15;
     this.sunLight.shadow.mapSize.set(1024, 1024);

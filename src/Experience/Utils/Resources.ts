@@ -1,12 +1,12 @@
-import * as THREE from "three";
-import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
-import EventEmitter from "./EventEmitter.js";
+import * as THREE from 'three';
+import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import EventEmitter from './EventEmitter.js';
 
 // Source type union for different resources
 export type Source =
-  | { name: string; type: "gltfModel"; path: string }
-  | { name: string; type: "texture"; path: string }
-  | { name: string; type: "cubeTexture"; path: string[] };
+  | { name: string; type: 'gltfModel'; path: string }
+  | { name: string; type: 'texture'; path: string }
+  | { name: string; type: 'cubeTexture'; path: string[] };
 
 type LoaderMap = {
   gltfLoader: GLTFLoader;
@@ -47,26 +47,20 @@ export default class Resources extends EventEmitter {
   private startLoading(): void {
     for (const source of this.sources) {
       switch (source.type) {
-        case "gltfModel":
+        case 'gltfModel':
           this.loaders.gltfLoader.load(source.path, (file: GLTF) => {
             this.sourceLoaded(source, file);
           });
           break;
-        case "texture":
-          this.loaders.textureLoader.load(
-            source.path,
-            (file: THREE.Texture) => {
-              this.sourceLoaded(source, file);
-            },
-          );
+        case 'texture':
+          this.loaders.textureLoader.load(source.path, (file: THREE.Texture) => {
+            this.sourceLoaded(source, file);
+          });
           break;
-        case "cubeTexture":
-          this.loaders.cubeTextureLoader.load(
-            source.path,
-            (file: THREE.CubeTexture) => {
-              this.sourceLoaded(source, file);
-            },
-          );
+        case 'cubeTexture':
+          this.loaders.cubeTextureLoader.load(source.path, (file: THREE.CubeTexture) => {
+            this.sourceLoaded(source, file);
+          });
           break;
       }
     }
@@ -76,7 +70,7 @@ export default class Resources extends EventEmitter {
     this.items[source.name] = file;
     this.loaded++;
     if (this.loaded === this.toLoad) {
-      this.trigger("ready", []); // EventEmitter expects _args array
+      this.trigger('ready', []); // EventEmitter expects _args array
     }
   }
 }

@@ -1,7 +1,7 @@
-import * as THREE from "three";
-import Experience from "../Experience.js";
-import Environment from "./Environment.js";
-import Floor from "./Floor.js";
+import * as THREE from 'three';
+import Experience from '../Experience.js';
+import Environment from './Environment.js';
+import Floor from './Floor.js';
 
 export default class World {
   private experience: Experience;
@@ -14,7 +14,7 @@ export default class World {
     this.scene = this.experience.scene;
 
     // Setup
-    experience.resources.on("ready", () => {
+    experience.resources.on('ready', () => {
       this.floor = new Floor(experience);
       this.environment = new Environment(experience);
     });
