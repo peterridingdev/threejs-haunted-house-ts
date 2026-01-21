@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import Experience from '../Experience';
+import Roof from './Roof';
 
 type WallTextures = {
   color: THREE.Texture;
@@ -19,6 +20,7 @@ export default class House {
   private experience: Experience;
   private scene: THREE.Scene;
   private resources: Experience['resources'];
+  private roof!: Roof;
 
   public group: THREE.Group;
 
@@ -29,16 +31,24 @@ export default class House {
   private wallMaterial!: THREE.MeshStandardMaterial;
 
   // Roof
-  private roof!: THREE.Mesh;
+  // private roof!: THREE.Mesh;
   private roofTextures!: RoofTextures;
   private roofGeometry!: THREE.ConeGeometry;
   private roofMaterial!: THREE.MeshStandardMaterial;
+
+  // // Door
+  // private door!: Door
+
+  // // Hedges
+  // private hedges!: Hedges
+
   constructor(experience: Experience) {
     this.experience = experience;
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
 
     this.group = new THREE.Group();
+    this.roof = new Roof(this.experience);
     this.scene.add(this.group);
 
     // Build the house parts

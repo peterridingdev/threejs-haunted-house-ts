@@ -41,4 +41,19 @@ export const sources: Source[] = [
     type: 'texture',
     path: 'wall/castle_brick_broken_06_1k/castle_brick_broken_06_nor_gl_1k.webp',
   },
+  {
+    name: 'roofARMTexture',
+    type: 'texture',
+    path: 'roof/roof_slates_02_1k/roof_slates_02_arm_1k.webp',
+  },
+  {
+    name: 'roofColorTexture',
+    type: 'texture',
+    path: 'roof/roof_slates_02_1k/roof_slates_02_diff_1k.webp',
+  },
+  {
+    name: 'roofNormalTexture',
+    type: 'texture',
+    path: 'roof/roof_slates_02_1k/roof_slates_02_nor_gl_1k.webp',
+  },
 ];
