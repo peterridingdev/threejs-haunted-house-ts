@@ -3,7 +3,7 @@ import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 import EventEmitter from "./EventEmitter.js";
 
 // Source type union for different resources
-type Source =
+export type Source =
   | { name: string; type: "gltfModel"; path: string }
   | { name: string; type: "texture"; path: string }
   | { name: string; type: "cubeTexture"; path: string[] };
@@ -75,7 +75,6 @@ export default class Resources extends EventEmitter {
   private sourceLoaded(source: Source, file: any): void {
     this.items[source.name] = file;
     this.loaded++;
-
     if (this.loaded === this.toLoad) {
       this.trigger("ready", []); // EventEmitter expects _args array
     }

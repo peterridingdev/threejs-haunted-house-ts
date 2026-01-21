@@ -1,24 +1,22 @@
 import * as THREE from "three";
 import Experience from "../Experience.js";
 import Environment from "./Environment.js";
+import Floor from "./Floor.js";
 
 export default class World {
   private experience: Experience;
   private scene: THREE.Scene;
-  private environment: Environment;
+  private environment?: Environment;
+  private floor?: Floor;
 
   constructor(experience: Experience) {
     this.experience = experience; // pass in the singleton instance
     this.scene = this.experience.scene;
 
-    // Test mesh
-    // const testMesh = new THREE.Mesh(
-    //   new THREE.BoxGeometry(1, 1, 1),
-    //   new THREE.MeshStandardMaterial(),
-    // );
-    // this.scene.add(testMesh);
-
     // Setup
-    this.environment = new Environment(this.experience);
+    experience.resources.on("ready", () => {
+      this.floor = new Floor(experience);
+      this.environment = new Environment(experience);
+    });
   }
 }
