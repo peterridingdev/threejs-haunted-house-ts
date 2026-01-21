@@ -5,17 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "format": "prettier --write \"src/**/*.{ts,js}\"",
+    "lint": "eslint \"src/**/*.{ts,js}\""
   },
   "devDependencies": {
-    "@types/node": "^25.0.9",
-    "@types/three": "^0.182.0",
-    "typescript": "^5.9.3",
-    "vite": "^6.2.2",
-    "vite-plugin-restart": "^0.4.2"
+    "@types/node": "25.0.9",
+    "@types/three": "0.182.0",
+    "@typescript-eslint/eslint-plugin": "6.6.0",
+    "@typescript-eslint/parser": "6.6.0",
+    "eslint": "8.50.0",
+    "prettier": "3.8.0",
+    "typescript": "5.9.3",
+    "vite": "^6.4.1",
+    "vite-plugin-restart": "0.4.2"
   },
   "dependencies": {
-    "lil-gui": "^0.20.0",
-    "three": "^0.174.0"
+    "lil-gui": "0.20.0",
+    "three": "0.174.0"
   }
 }

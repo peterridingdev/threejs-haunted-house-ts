@@ -1,5 +1,5 @@
-import * as THREE from "three";
-import Experience from "../Experience";
+import * as THREE from 'three';
+import Experience from '../Experience';
 
 type FloorTextures = {
   color: THREE.Texture;
@@ -12,7 +12,7 @@ type FloorTextures = {
 export default class Floor {
   private experience: Experience;
   private scene: THREE.Scene;
-  private resources: Experience["resources"];
+  private resources: Experience['resources'];
   private textures!: FloorTextures;
   private geometry!: THREE.PlaneGeometry;
   private material!: THREE.MeshStandardMaterial;
@@ -36,8 +36,7 @@ export default class Floor {
   private setTextures(): void {
     const color = this.resources.items.floorColorTexture as THREE.Texture;
     const normal = this.resources.items.floorNormalTexture as THREE.Texture;
-    const displacement = this.resources.items
-      .floorDisplacementTexture as THREE.Texture;
+    const displacement = this.resources.items.floorDisplacementTexture as THREE.Texture;
     const arm = this.resources.items.floorARMTexture as THREE.Texture;
 
     const alpha = this.resources.items.floorAlphaTexture as THREE.Texture;
