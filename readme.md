@@ -14,8 +14,9 @@ A Three.js haunted house scene from the **Three.js Journey** course, refactored 
 - Modular scene classes (House, Graves, Ghosts, Lights)
 - TypeScript strict mode
 - Responsive canvas + OrbitControls
+- PBR textured floor with AO, normal and displacement maps
 
-## Getting Started
+## Getting Starteda
 
 ```bash
 npm install
