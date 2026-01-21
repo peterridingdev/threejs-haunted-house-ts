@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "format": "prettier --write 'src/**/*.{ts,js}'"
+    "format": "prettier --write \"src/**/*.{ts,js}\"",
+    "lint": "eslint \"src/**/*.{ts,js}\""
   },
   "devDependencies": {
     "@types/node": "25.0.9",

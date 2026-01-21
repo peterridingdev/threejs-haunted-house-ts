@@ -13,9 +13,8 @@ export default class Camera {
   private scene: THREE.Scene;
   private canvas: HTMLCanvasElement;
 
-  constructor() {
-    // References from Experience singleton
-    this.experience = new Experience(window.experience?.canvas ?? this.createCanvas());
+  constructor(experience: Experience) {
+    this.experience = experience;
     this.sizes = this.experience.sizes;
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
