@@ -3,6 +3,7 @@ import Experience from '../Experience.js';
 import Environment from './Environment.js';
 import Floor from './Floor.js';
 import House from './House.js';
+import Graves from './Graves.js';
 
 export default class World {
   private experience: Experience;
@@ -10,6 +11,7 @@ export default class World {
   private environment?: Environment;
   private floor?: Floor;
   private house?: House;
+  private graves?: Graves;
 
   constructor(experience: Experience) {
     this.experience = experience; // pass in the singleton instance
@@ -20,6 +22,7 @@ export default class World {
       this.floor = new Floor(experience);
       this.environment = new Environment(experience);
       this.house = new House(experience);
+      this.graves = new Graves(experience);
     });
   }
 }
