@@ -43,6 +43,8 @@ export default class Door extends THREE.Group {
     const roughness = this.resources.items.doorRoughnessTexture as THREE.Texture;
     const alpha = this.resources.items.doorAlphaTexture as THREE.Texture;
 
+    color.colorSpace = THREE.SRGBColorSpace;
+
     this.textures = { color, normal, ao, height, metalness, roughness, alpha };
   }
 
