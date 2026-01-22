@@ -14,7 +14,7 @@ export default class House {
   private experience: Experience;
   private scene: THREE.Scene;
   private resources: Experience['resources'];
-
+  private doorLight!: THREE.PointLight;
   public group!: THREE.Group;
 
   // Walls
@@ -48,7 +48,9 @@ export default class House {
 
     // Build the house parts
     this.setWalls();
-    // this.setRoof();
+
+    // Add light
+    this.setDoorLight();
   }
 
   private setWallTextures(): WallTextures {
@@ -85,5 +87,12 @@ export default class House {
     this.setWallGeometry();
     this.setWallMaterial();
     this.setWallMesh();
+  }
+
+  private setDoorLight() {
+    this.doorLight = new THREE.PointLight('#ff7d46', 5);
+    this.doorLight.position.set(0, 2.2, 2.5); // relative to house
+
+    this.group.add(this.doorLight);
   }
 }

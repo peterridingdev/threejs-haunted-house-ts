@@ -4,24 +4,39 @@ import Experience from '../Experience.js';
 export default class Environment {
   private experience: Experience;
   private scene: THREE.Scene;
-  private sunLight!: THREE.DirectionalLight;
+  private directionalLight!: THREE.DirectionalLight;
+  private ambientLight!: THREE.AmbientLight;
+  private doorLight!: THREE.PointLight;
 
   constructor(experience: Experience) {
     this.experience = experience; // pass in the singleton
     this.scene = this.experience.scene;
 
     // Setup
-    this.setSunLight();
+    this.setDirectionalLight();
+    this.setAmbientLight();
+    this.setPointLight();
   }
 
-  private setSunLight(): void {
-    this.sunLight = new THREE.DirectionalLight('#ffffff', 4);
-    this.sunLight.castShadow = true;
-    this.sunLight.shadow.camera.far = 15;
-    this.sunLight.shadow.mapSize.set(1024, 1024);
-    this.sunLight.shadow.normalBias = 0.05;
-    this.sunLight.position.set(3, 3, -2.25);
+  private setDirectionalLight(): void {
+    this.directionalLight = new THREE.DirectionalLight('#86cdff', 1);
+    this.directionalLight.castShadow = true;
+    // this.directionalLight.shadow.camera.far = 15;
+    // this.directionalLight.shadow.mapSize.set(1024, 1024);
+    // this.directionalLight.shadow.normalBias = 0.05;
+    this.directionalLight.position.set(3, 2, -8);
 
-    this.scene.add(this.sunLight);
+    this.scene.add(this.directionalLight);
+  }
+
+  private setAmbientLight() {
+    this.ambientLight = new THREE.AmbientLight('#86cdff', 0.275);
+    this.scene.add(this.ambientLight);
+  }
+
+  private setPointLight() {
+    // Set light above door
+    this.doorLight = new THREE.PointLight('#ff7d46', 5);
+    this.doorLight.position.set(0, 2.2, 2.5);
   }
 }
