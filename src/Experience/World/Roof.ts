@@ -7,7 +7,7 @@ type RoofTextures = {
   arm: THREE.Texture;
 };
 
-export default class Roof {
+export default class Roof extends THREE.Group {
   private experience: Experience;
   private geometry!: THREE.ConeGeometry;
   private resources: Experience['resources'];
@@ -17,6 +17,7 @@ export default class Roof {
   private scene: THREE.Scene;
 
   constructor(experience: Experience) {
+    super();
     this.experience = experience;
     this.resources = this.experience.resources;
     this.scene = this.experience.scene;
@@ -66,6 +67,6 @@ export default class Roof {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.position.y = 2.5 + 0.75;
     this.mesh.rotation.y = Math.PI * 0.25;
-    this.scene.add(this.mesh);
+    this.add(this.mesh);
   }
 }

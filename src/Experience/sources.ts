@@ -56,4 +56,69 @@ export const sources: Source[] = [
     type: 'texture',
     path: 'roof/roof_slates_02_1k/roof_slates_02_nor_gl_1k.webp',
   },
+  {
+    name: 'doorColorTexture',
+    type: 'texture',
+    path: 'door/color.webp',
+  },
+  {
+    name: 'doorNormalTexture',
+    type: 'texture',
+    path: 'door/normal.webp',
+  },
+  {
+    name: 'doorAmbientOcclusionTexture',
+    type: 'texture',
+    path: 'door/ambientOcclusion.webp',
+  },
+  {
+    name: 'doorHeightTexture',
+    type: 'texture',
+    path: 'door/height.webp',
+  },
+  {
+    name: 'doorMetalnessTexture',
+    type: 'texture',
+    path: 'door/metalness.webp',
+  },
+  {
+    name: 'doorRoughnessTexture',
+    type: 'texture',
+    path: 'door/roughness.webp',
+  },
+  {
+    name: 'doorAlphaTexture',
+    type: 'texture',
+    path: 'door/alpha.webp',
+  },
+  {
+    name: 'graveARMTexture',
+    type: 'texture',
+    path: 'grave/plastered_stone_wall_1k/plastered_stone_wall_arm_1k.webp',
+  },
+  {
+    name: 'graveColorTexture',
+    type: 'texture',
+    path: 'grave/plastered_stone_wall_1k/plastered_stone_wall_diff_1k.webp',
+  },
+  {
+    name: 'graveNormalTexture',
+    type: 'texture',
+    path: 'grave/plastered_stone_wall_1k/plastered_stone_wall_nor_gl_1k.webp',
+  },
+  {
+    name: 'bushARMTexture',
+    type: 'texture',
+    path: 'bush/leaves_forest_ground_1k/leaves_forest_ground_arm_1k.webp',
+  },
+  {
+    name: 'bushColorTexture',
+    type: 'texture',
+    path: 'bush/leaves_forest_ground_1k/leaves_forest_ground_diff_1k.webp',
+  },
+  {
+    name: 'bushNormalTexture',
+    type: 'texture',
+    path: 'bush/leaves_forest_ground_1k/leaves_forest_ground_nor_gl_1k.webp',
+  },
 ];
