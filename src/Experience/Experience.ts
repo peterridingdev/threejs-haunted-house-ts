@@ -17,23 +17,19 @@ export default class Experience {
   // Singleton instance
   private static instance: Experience;
 
-  canvas!: HTMLCanvasElement;
-  sizes!: Sizes;
-  time!: Time;
-  scene!: THREE.Scene;
-  camera!: Camera;
-  renderer!: Renderer;
-  world!: World;
-  resources!: Resources;
+  public canvas!: HTMLCanvasElement;
+  public sizes!: Sizes;
+  public time!: Time;
+  public scene!: THREE.Scene;
+  public camera!: Camera;
+  public renderer!: Renderer;
+  public world!: World;
+  public resources!: Resources;
 
   constructor(canvas: HTMLCanvasElement) {
-    // Return existing instance if already created
     if (Experience.instance) return Experience.instance;
 
-    // Set singleton instance
     Experience.instance = this;
-
-    // Expose globally (optional, but useful for debugging)
     window.experience = this;
 
     // Initialize core systems
@@ -47,18 +43,20 @@ export default class Experience {
     this.world = new World(this);
 
     // Event listeners
-    this.sizes.on('resize', () => this.resize());
-    this.time.on('tick', () => this.update());
+    this.sizes.on('resize', this.resize.bind(this));
+    this.time.on('tick', this.update.bind(this));
 
-    return this; // explicit return for clarity
+    return this;
   }
 
-  resize(): void {
+  /** Resize all systems */
+  public resize(): void {
     this.camera.resize();
     this.renderer.resize();
   }
 
-  update(): void {
+  /** Update loop called every frame */
+  public update(): void {
     this.world.update();
     this.camera.update();
     this.renderer.update();

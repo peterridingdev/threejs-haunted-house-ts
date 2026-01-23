@@ -49,7 +49,7 @@ export default class Ghosts {
     this.scene.add(this.ghost1, this.ghost2, this.ghost3);
   }
 
-  update(): void {
+  public update(): void {
     const delta = this.time.delta * 0.001;
 
     // Angular speed in radians per second
