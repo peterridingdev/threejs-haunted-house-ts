@@ -2,6 +2,8 @@
 
 ![Haunted House Screenshot](./static/haunted-house-ts-screenshot.png)
 
+🔗 **Live Demo:** [haunted-house-ts.vercel.app](https://haunted-house-ts.vercel.app)
+
 A Three.js haunted house scene originally built from the **Three.js Journey** course and refactored into a **class-based, TypeScript architecture**.
 
 This project focuses on restructuring a tutorial scene into a more maintainable, modular real-time 3D application.
