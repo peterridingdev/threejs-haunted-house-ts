@@ -1,10 +1,12 @@
 import * as THREE from 'three';
-import Experience from '../Experience.js';
-import Environment from './Environment.js';
-import Floor from './Floor.js';
-import House from './House.js';
-import Graves from './Graves.js';
-import Ghosts from './Ghosts.js';
+import Experience from '../Experience';
+import Environment from './Environment';
+import Floor from './Floor';
+import House from './House';
+import Graves from './Graves';
+import Ghosts from './Ghosts';
+import Sky from './Sky';
+import Fog from './Fog';
 
 export default class World {
   private experience: Experience;
@@ -14,22 +16,26 @@ export default class World {
   private house?: House;
   private graves?: Graves;
   private ghosts?: Ghosts;
+  private sky?: Sky;
+  private fog?: Fog;
 
   constructor(experience: Experience) {
     this.experience = experience; // pass in the singleton instance
     this.scene = this.experience.scene;
 
-    // Setup
-    experience.resources.on('ready', () => {
-      this.floor = new Floor(experience);
-      this.environment = new Environment(experience);
-      this.house = new House(experience);
-      this.graves = new Graves(experience);
-      this.ghosts = new Ghosts(experience);
+    // Setup after resources are ready
+    this.experience.resources.on('ready', () => {
+      this.floor = new Floor(this.experience);
+      this.environment = new Environment(this.experience);
+      this.house = new House(this.experience);
+      this.graves = new Graves(this.experience);
+      this.ghosts = new Ghosts(this.experience);
+      this.sky = new Sky(this.experience);
+      this.fog = new Fog(this.experience);
     });
   }
 
-  update(): void {
+  public update(): void {
     this.ghosts?.update();
   }
 }
