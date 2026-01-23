@@ -1,11 +1,12 @@
 import * as THREE from 'three';
 import Experience from './Experience.js';
+import Camera from './Camera.js';
 
 export default class Renderer {
   private canvas: HTMLCanvasElement;
   private sizes: any; // Keep minimal; ideally type Sizes interface
   private scene: THREE.Scene;
-  private camera: any; // Camera class instance
+  private camera: Camera; // Camera class instance
   public instance!: THREE.WebGLRenderer; // ! tells TS it will be initialized
 
   constructor(private experience: Experience) {

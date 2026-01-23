@@ -67,6 +67,7 @@ export default class Roof extends THREE.Group {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.position.y = 2.5 + 0.75;
     this.mesh.rotation.y = Math.PI * 0.25;
+    this.mesh.castShadow = true;
     this.add(this.mesh);
   }
 }

@@ -28,6 +28,24 @@ export default class Ghosts {
     this.ghost2 = new THREE.PointLight('#ff0088', 6);
     this.ghost3 = new THREE.PointLight('#ff0000', 6);
 
+    // Shadows
+    this.ghost1.castShadow = true;
+    this.ghost2.castShadow = true;
+    this.ghost3.castShadow = true;
+
+    this.ghost1.shadow.mapSize.width = 256;
+    this.ghost1.shadow.mapSize.height = 256;
+    this.ghost1.shadow.camera.far = 10;
+
+    this.ghost2.shadow.mapSize.width = 256;
+    this.ghost2.shadow.mapSize.height = 256;
+    this.ghost2.shadow.camera.far = 10;
+
+    this.ghost3.shadow.mapSize.width = 256;
+    this.ghost3.shadow.mapSize.height = 256;
+    this.ghost3.shadow.camera.far = 10;
+
+    // Add to scene
     this.scene.add(this.ghost1, this.ghost2, this.ghost3);
   }
 

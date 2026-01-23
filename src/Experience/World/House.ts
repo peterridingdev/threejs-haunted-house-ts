@@ -79,6 +79,8 @@ export default class House {
   private setWallMesh() {
     this.walls = new THREE.Mesh(this.wallGeometry, this.wallMaterial);
     this.walls.position.y += 1.25;
+    this.walls.castShadow = true;
+    this.walls.receiveShadow = true;
     this.group.add(this.walls);
   }
 
