@@ -30,11 +30,11 @@ export default class Bushes extends THREE.Group {
     this.setBush4();
   }
 
-  setGeometry(): void {
+  private setGeometry(): void {
     this.geometry = new THREE.SphereGeometry(1, 16, 16);
   }
 
-  setTextures(): void {
+  private setTextures(): void {
     const color = this.resources.items.bushColorTexture as THREE.Texture;
 
     const normal = this.resources.items.bushNormalTexture as THREE.Texture;
@@ -58,7 +58,7 @@ export default class Bushes extends THREE.Group {
     };
   }
 
-  setMaterials() {
+  private setMaterials() {
     this.material = new THREE.MeshStandardMaterial({
       map: this.textures.color,
       normalMap: this.textures.normal,
@@ -68,7 +68,7 @@ export default class Bushes extends THREE.Group {
     });
   }
 
-  setBush1() {
+  private setBush1() {
     this.bush1 = new THREE.Mesh(this.geometry, this.material);
 
     this.bush1.scale.set(0.5, 0.5, 0.5);
@@ -77,7 +77,7 @@ export default class Bushes extends THREE.Group {
     this.add(this.bush1);
   }
 
-  setBush2() {
+  private setBush2() {
     this.bush2 = new THREE.Mesh(this.geometry, this.material);
 
     this.bush2.scale.set(0.25, 0.25, 0.25);
@@ -87,7 +87,7 @@ export default class Bushes extends THREE.Group {
     this.add(this.bush2);
   }
 
-  setBush3() {
+  private setBush3() {
     this.bush3 = new THREE.Mesh(this.geometry, this.material);
     this.bush3.scale.set(0.4, 0.4, 0.4);
     this.bush3.position.set(-0.8, 0.1, 2.2);
@@ -96,7 +96,7 @@ export default class Bushes extends THREE.Group {
     this.add(this.bush3);
   }
 
-  setBush4() {
+  private setBush4() {
     this.bush4 = new THREE.Mesh(this.geometry, this.material);
 
     this.bush4.scale.set(0.15, 0.15, 0.15);

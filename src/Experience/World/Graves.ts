@@ -25,6 +25,7 @@ export default class Graves {
     this.setTextures();
     this.setMaterial();
     this.setGraves();
+    this.addShadows();
   }
 
   setGeometry() {
@@ -86,5 +87,12 @@ export default class Graves {
       this.graves.add(grave);
     }
     this.scene.add(this.graves);
+  }
+
+  addShadows() {
+    for (const grave of this.graves.children) {
+      grave.castShadow = true;
+      grave.receiveShadow = true;
+    }
   }
 }
