@@ -6,6 +6,7 @@ import Renderer from './Renderer';
 import World from './World/World';
 import Resources from './Utils/Resources';
 import { sources } from './sources';
+import Sky from './World/Sky';
 
 declare global {
   interface Window {
@@ -44,6 +45,7 @@ export default class Experience {
     this.camera = new Camera(this);
     this.renderer = new Renderer(this);
     this.resources = new Resources(sources);
+    this.sky = new Sky(this);
     this.world = new World(this);
 
     // Event listeners
