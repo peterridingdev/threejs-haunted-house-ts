@@ -1,4 +1,4 @@
-type Callback = (...args: any[]) => any;
+export type Callback<T extends unknown[] = unknown[]> = (...args: T) => void;
 
 interface Callbacks {
   [namespace: string]: {
@@ -9,11 +9,11 @@ interface Callbacks {
 export default class EventEmitter {
   private callbacks: Callbacks = { base: {} };
 
-  on(_names: string, callback: Callback): this | false {
-    if (!_names || typeof callback !== 'function') {
-      console.warn('Invalid name or callback');
-      return false;
-    }
+  /**
+   * Subscribe to an event
+   */
+  public on<T extends unknown[] = unknown[]>(_names: string, callback: Callback<T>): this {
+    if (!_names || typeof callback !== 'function') return this;
 
     const names = this.resolveNames(_names);
 
@@ -23,17 +23,17 @@ export default class EventEmitter {
       if (!this.callbacks[namespace]) this.callbacks[namespace] = {};
       if (!this.callbacks[namespace][value]) this.callbacks[namespace][value] = [];
 
-      this.callbacks[namespace][value].push(callback);
+      this.callbacks[namespace][value].push(callback as Callback);
     });
 
     return this;
   }
 
-  off(_names: string): this | false {
-    if (!_names) {
-      console.warn('Invalid name');
-      return false;
-    }
+  /**
+   * Unsubscribe from an event
+   */
+  public off(_names: string): this {
+    if (!_names) return this;
 
     const names = this.resolveNames(_names);
 
@@ -56,46 +56,46 @@ export default class EventEmitter {
     return this;
   }
 
-  trigger(_name: string, _args: any[] = []): any {
-    if (!_name) {
-      console.warn('Invalid name');
-      return false;
-    }
-
-    let finalResult: any;
+  /**
+   * Trigger an event
+   */
+  public trigger<T extends unknown[] = unknown[]>(_name: string, ...args: T): void {
+    if (!_name) return;
 
     const names = this.resolveNames(_name);
     const { namespace, value } = this.resolveName(names[0]);
 
-    const invoke = (cbArray: Callback[]) => {
-      cbArray.forEach((cb) => {
-        const result = cb(..._args);
-        if (finalResult === undefined) finalResult = result;
-      });
+    const invoke = (cbArray: Callback<T>[]) => {
+      cbArray.forEach((cb) => cb(...args));
     };
 
     if (namespace === 'base') {
       for (const ns in this.callbacks) {
         if (this.callbacks[ns]?.[value]) {
-          invoke(this.callbacks[ns][value]);
+          invoke(this.callbacks[ns][value] as Callback<T>[]);
         }
       }
     } else {
       if (this.callbacks[namespace]?.[value]) {
-        invoke(this.callbacks[namespace][value]);
+        invoke(this.callbacks[namespace][value] as Callback<T>[]);
       }
     }
-
-    return finalResult;
   }
 
+  /**
+   * Clean & split names
+   */
   private resolveNames(_names: string): string[] {
     return _names
       .replace(/[^a-zA-Z0-9 ,/.]/g, '')
       .replace(/[,/]+/g, ' ')
-      .split(' ');
+      .split(' ')
+      .filter(Boolean);
   }
 
+  /**
+   * Separate event name from namespace
+   */
   private resolveName(name: string) {
     const parts = name.split('.');
     return {
