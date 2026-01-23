@@ -8,15 +8,21 @@ export type Source =
   | { name: string; type: 'texture'; path: string }
   | { name: string; type: 'cubeTexture'; path: string[] };
 
+// Map loaders to their types
 type LoaderMap = {
   gltfLoader: GLTFLoader;
   textureLoader: THREE.TextureLoader;
   cubeTextureLoader: THREE.CubeTextureLoader;
 };
 
+// Items type: map names to loaded resources
+export type ResourceItems = {
+  [key: string]: THREE.Texture | THREE.CubeTexture | GLTF;
+};
+
 export default class Resources extends EventEmitter {
   sources: Source[];
-  items: Record<string, any>; // Loaded items (THREE.Texture | THREE.CubeTexture | GLTF)
+  items: ResourceItems; // No more `any`
   toLoad: number;
   loaded: number;
   loaders!: LoaderMap;
@@ -24,10 +30,7 @@ export default class Resources extends EventEmitter {
   constructor(sources: Source[]) {
     super();
 
-    // Options
     this.sources = sources;
-
-    // Setup
     this.items = {};
     this.toLoad = this.sources.length;
     this.loaded = 0;
@@ -52,11 +55,13 @@ export default class Resources extends EventEmitter {
             this.sourceLoaded(source, file);
           });
           break;
+
         case 'texture':
           this.loaders.textureLoader.load(source.path, (file: THREE.Texture) => {
             this.sourceLoaded(source, file);
           });
           break;
+
         case 'cubeTexture':
           this.loaders.cubeTextureLoader.load(source.path, (file: THREE.CubeTexture) => {
             this.sourceLoaded(source, file);
@@ -66,9 +71,10 @@ export default class Resources extends EventEmitter {
     }
   }
 
-  private sourceLoaded(source: Source, file: any): void {
+  private sourceLoaded(source: Source, file: THREE.Texture | THREE.CubeTexture | GLTF): void {
     this.items[source.name] = file;
     this.loaded++;
+
     if (this.loaded === this.toLoad) {
       this.trigger('ready', []); // EventEmitter expects _args array
     }
